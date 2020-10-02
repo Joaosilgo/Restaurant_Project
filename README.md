@@ -1,6 +1,6 @@
 # 🍕 Restaurant_Project
 
-````
+````BASH
 echo "# Restaurant_Project" >> README.md
 git init
 git add README.md
@@ -10,4 +10,6 @@ git remote add origin https://github.com/Joaosilgo/Restaurant_Project.git
 git push -u origin main
 
 ````
+
+
                 
