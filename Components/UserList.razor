@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using retaurant_info.Models
+@using retaurant_info.Controllers
+@using retaurant_info.Data
+
+@using Microsoft.AspNetCore.Components
+
+@inject retaurant_info.Services.UserServices Users;
+
+
+
+
+<h3>UserList</h3>
+
+
+
+
+
+@foreach (var item in Users.GetUsers())
+{
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted"><button @onclick="(e => SelectUser(item.Id))" data-toggle="modal" value="More Info"   data-target="#UserModal"  class="btn btn-primary">More Info</button></small>
+        </div>
+    </div>
+}
+
+
+
+@if (selectedUser != null)
+{
+    <div class="modal fade" tabindex="-1" role="dialog" id="UserModal" aria-labelledby="productTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@selectedUser.Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <p class="card-text">@selectedUser.Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+
+    ApplicationUser selectedUser;
+    string selectedUserId;
+
+    void SelectUser(string UserId)
+    {
+        selectedUserId = UserId;
+        selectedUser = Users.GetUsers().First(x => x.Id == UserId);
+        //GetCurrentUser();
+    }
+
+
+}

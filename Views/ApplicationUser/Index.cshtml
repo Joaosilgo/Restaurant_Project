@@ -1,0 +1,32 @@
+﻿@model IEnumerable<retaurant_info.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h3>List Of Users</h3>
+
+@foreach (var item in Model)
+{
+<div class="card p-3  text-muted bg-white rounded">
+    <blockquote class="blockquote mb-0">
+        <p> @Html.DisplayFor(modelItem => item.Email) </p>
+        <footer class="blockquote-footer">
+            <small class="text-muted">
+                <cite title="Source Title">@Html.DisplayFor(modelItem => item.Name)</cite>
+            </small>
+        </footer>
+    </blockquote>
+
+    
+
+    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+
+    <a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
+
+</div>
+}
+
+

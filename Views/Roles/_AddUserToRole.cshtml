@@ -1,0 +1,87 @@
+﻿@model retaurant_info.Controllers.RolesController.UpdateUserRoleViewModel
+
+@{
+    ViewData["Title"] = "_AddUserToRole";
+}
+
+<h1>_AddUserToRole</h1>
+
+
+
+
+
+
+
+<div>
+    <form asp-controller="Roles" asp-action="UpdateUserRole" method="post">
+        <h2>Add User to Role</h2>
+
+        @foreach (var user in Model.Users)
+        {
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-check text-muted">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" asp-for="UserEmail" value="@user.Email">
+                        <label class="form-check-label" for="exampleCheck1">@user.Email</label>
+                    </div>
+
+
+
+
+
+
+                    @foreach (var role in user.Roles)
+                    {
+
+                        <p class="card-text">
+                            <span class="badge badge-secondary"> @role.Name</span>
+                        </p>
+
+
+                    }
+
+                </div>
+            </div>
+
+        }
+
+
+
+
+        <h4>Roles to add</h4>
+        @*<div class="card">*@
+        @*<div class="card-body">*@
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Roles</label>
+            </div>
+            <select asp-for="Role" class="custom-select" id="inputGroupSelect01">
+                @foreach (var role in Model.Roles)
+                {
+
+
+                    // <div class="form-check text-muted">
+                    //    <input type="checkbox" class="form-check-input" id="exampleCheck2" asp-for="Role" value="@role">
+                    //   <label class="form-check-label" for="exampleCheck2"> @role </label>
+                    // </div>
+
+                    <option asp-for="Role" value="@role">@role</option>
+
+
+
+                }
+            </select>
+        </div>
+
+        @* </div>
+            </div>
+        *@
+
+
+        <input type="submit" value="Add Role" class="btn btn-primary" />
+        <input type="hidden" asp-for="Delete" value="false" id="delete" />
+        <input type="submit" value="Delete Role" class="btn btn-warning" onclick="document.getElementById('delete').value = 'true'" />
+    </form>
+</div>
+
