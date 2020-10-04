@@ -23,16 +23,27 @@ namespace retaurant_info
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Version = Configuration.GetValue<string>("Application:Version");
+            Name = Configuration.GetValue<string>("Application:Name");
         }
 
         public IConfiguration Configuration { get; }
+        public string Version { get; }
+
+        public string Name { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
+                Configuration.GetConnectionString("DefaultConnection")));
+
+            /*
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+                    */
 
             services.AddScoped<SignInManager<ApplicationUser>, SignInManager<ApplicationUser>>();
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
