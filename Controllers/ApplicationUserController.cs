@@ -50,9 +50,13 @@ namespace retaurant_info.Controllers
             return View(users);
         }
         // GET: ApplicationUser/Create
-        public ActionResult Create()
+        // public ActionResult Create()
+        public IActionResult Create()
         {
-            return View();
+            var model = new ApplicationUser();
+            model.Links.Add(new Links());
+            return View(model);
+           // return View();
         }
 
 
@@ -60,14 +64,14 @@ namespace retaurant_info.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DOB,Email")] ApplicationUser applicationUser)
+        public async Task<IActionResult> Create([Bind("Id,Name,DOB,Email,Links")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
                
                     applicationUser.UserName = applicationUser.Email;
                     applicationUser.EmailConfirmed = true;
-
+                       // applicationUser.Links.ToList().Add();
                 var result = await _userManager.CreateAsync(applicationUser, applicationUser.Name);//Fica o Nome a Password
                     if (result.Succeeded)
                     {
@@ -93,7 +97,24 @@ namespace retaurant_info.Controllers
 
 
 
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddLinks([Bind("Links")] ApplicationUser user, Links link)
+        {
+            // var link = new Links();
+           // if (link.Titulo != null)
+          // {
+                user.Links.Add(link);
+                return PartialView("Links", user);
+
+           // }
+            //return View(user);
+
+        }
+
+
+
+
 
 
 

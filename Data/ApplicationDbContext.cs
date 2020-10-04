@@ -17,6 +17,9 @@ namespace retaurant_info.Data
             
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+            
+
+        public DbSet<retaurant_info.Models.Links> Links { get; set; }
 
 
        // protected override void OnModelCreating(ModelBuilder modelBuilder)

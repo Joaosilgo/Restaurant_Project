@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            <form asp-action="Create" id="form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Name"></label>
@@ -38,6 +38,20 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
+                <br />
+                <hr />
+                <div id="linksItemsContainer">
+                    @Html.EditorFor(model => model.Links)
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <input class="btn btn-default" type="button" id="btnAddLink" value="Add Link" />
+                    </div>
+                </div>
+                <hr />
+                <br />
 
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
@@ -50,11 +64,56 @@
 }
 else
 {
-    
-        <div>@ViewBag.Message</div>
+
+    <div>@ViewBag.Message</div>
 
 }
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+
+
+
+        $("#btnAddLink").on('click', function () {
+
+           // var url = document.getElementById("#url");
+          //  var titulo = document.getElementById("#titulo");
+         //   if (document.getElementsByClassName("url").value.trim() == '' || document.getElementsByClassName("titulo").value.trim() == '') {
+           //     console.log("inputs empty 🍕");
+           // } else {
+
+                $.ajax({
+                    async: true,
+                    data: $('#form').serialize(),
+                    type: "POST",
+                    url: '/ApplicationUser/AddLinks',
+                    success: function (partialView) {
+                        console.log("partialView: " + partialView);
+                        $('#linksItemsContainer').html(partialView);
+                    }
+                });
+
+
+         //   }
+        });
+
+
+
+
+
+    </script>
+}
