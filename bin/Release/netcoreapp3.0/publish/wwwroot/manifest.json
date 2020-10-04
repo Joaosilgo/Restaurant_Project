@@ -1,0 +1,8 @@
+﻿{
+  "name": "Awesome Application",
+  "short_name": "Awesome",
+  "description": "The most awesome application in the world",
+  
+  "display": "standalone",
+  "start_url": "/"
+}

@@ -43,7 +43,7 @@ using Microsoft.AspNetCore.Components;
 #line default
 #line hidden
 #nullable disable
-    public class UserList : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class UserList : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
