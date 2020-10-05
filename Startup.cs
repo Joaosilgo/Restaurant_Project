@@ -36,9 +36,10 @@ namespace retaurant_info
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
+          services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
                 Configuration.GetConnectionString("DefaultConnection")));
 
+            
             /*
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -92,11 +93,23 @@ namespace retaurant_info
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            /*
+            var context = app.ApplicationServices.GetService<ApplicationDbContext>();
+
+            if (!context.Database.EnsureCreated())
+            {
+                context.Database.Migrate();
+            }
+            */
+            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
 

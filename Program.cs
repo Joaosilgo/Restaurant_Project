@@ -21,13 +21,13 @@ namespace retaurant_info
 
 
 
-            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");
+           // Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");
 
             //CreateHostBuilder(args).Build().Run();
 
             //var host = CreateHostBuilder(args).Build();
             var host = CreateWebHostBuilder(args).Build();
-            SeedDatabase(host);
+           // SeedDatabase(host);
             host.Run();
         }
 
@@ -66,6 +66,7 @@ namespace retaurant_info
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex.ToString());
                     logger.LogError("An error occurred while seeding the database");
                 }
             }
