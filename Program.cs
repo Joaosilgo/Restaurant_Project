@@ -21,7 +21,7 @@ namespace retaurant_info
 
 
 
-
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");
 
             //CreateHostBuilder(args).Build().Run();
 
